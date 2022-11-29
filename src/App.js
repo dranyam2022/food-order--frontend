@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
+import CartProvider from "./store/CartProvider";
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -17,13 +18,13 @@ function App() {
   };
 
   return (
-    <React.Fragment>
-      {!isCartOpen ? "" : <Cart onCloseCart={closeCartHandler}/>}
+    <CartProvider>
+      {isCartOpen && <Cart onCloseCart={closeCartHandler} />}
       <Header onOpenCart={openCartHandler} />
       <main>
         <Meals />
       </main>
-    </React.Fragment>
+    </CartProvider>
   );
 }
 
