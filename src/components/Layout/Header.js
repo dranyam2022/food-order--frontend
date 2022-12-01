@@ -7,7 +7,7 @@ function Header(props) {
   return (
     <React.Fragment>
       <header className={classes.header}>
-        <h1>ReactMeals</h1>
+        <h1>Food Order Website</h1>
         <HeaderCartButton
           onCloseCart={props.onCloseCart}
           onOpenCart={props.onOpenCart}
