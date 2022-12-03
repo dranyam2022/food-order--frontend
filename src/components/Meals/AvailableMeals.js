@@ -1,37 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./AvailableMeals.module.css";
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 
-const DUMMY_MEALS = [
-  {
-    id: "m1",
-    name: "Sushi",
-    description: "Finest fish and veggies",
-    price: 22.99,
-  },
-  {
-    id: "m2",
-    name: "Schnitzel",
-    description: "A german specialty!",
-    price: 16.5,
-  },
-  {
-    id: "m3",
-    name: "Barbecue Burger",
-    description: "American, raw, meaty",
-    price: 12.99,
-  },
-  {
-    id: "m4",
-    name: "Green Bowl",
-    description: "Healthy...and green...",
-    price: 18.99,
-  },
-];
-
 function AvailableMeals() {
-  const mealsList = DUMMY_MEALS.map((meal) => {
+  const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    const fetchMeals = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          "https://react-practice01-2a758-default-rtdb.asia-southeast1.firebasedatabase.app/meals.json"
+        );
+        if (response.ok) {
+          const responseData = await response.json();
+          setIsLoading(false);
+
+          const responseDataArray = [];
+          for (const key in responseData) {
+            responseDataArray.push({
+              id: key,
+              name: responseData[key].name,
+              description: responseData[key].description,
+              price: responseData[key].price,
+            });
+          }
+          setMeals((prevState) => {
+            return responseDataArray;
+          });
+        } else {
+          throw new Error("Something went wrong...");
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchMeals();
+  }, []);
+  const mealsList = meals.map((meal) => {
     return (
       <MealItem
         key={meal.id}
@@ -45,7 +52,7 @@ function AvailableMeals() {
   return (
     <section className={classes.meals}>
       <Card>
-        <ul>{mealsList}</ul>
+        {!isLoading ? <ul>{mealsList}</ul> : <p>Loading Content...</p>}
       </Card>
     </section>
   );

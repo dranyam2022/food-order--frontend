@@ -25,7 +25,7 @@ function MealItemForm(props) {
   };
 
   const inputAttribute = {
-    id: "amount" + props.id,
+    id: "amount_" + props.id,
     type: "number",
     min: "1",
     max: "5",

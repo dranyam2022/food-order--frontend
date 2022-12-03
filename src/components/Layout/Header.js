@@ -8,10 +8,7 @@ function Header(props) {
     <React.Fragment>
       <header className={classes.header}>
         <h1>Food Order Website</h1>
-        <HeaderCartButton
-          onCloseCart={props.onCloseCart}
-          onOpenCart={props.onOpenCart}
-        />
+        <HeaderCartButton onOpenCart={props.onOpenCart} />
       </header>
       <div className={classes["main-image"]}>
         <img src={mealsImage} alt="A table of delicious food." />

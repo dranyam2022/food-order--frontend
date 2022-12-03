@@ -8,12 +8,14 @@ function HeaderCartButton(props) {
   const { items } = cartCtx;
   const [btnIsHighlighted, setBtnIsHighlighted] = useState(false);
   const numberOfCartItems = items.reduce((totalNumber, item) => {
+    console.log(item);
     return totalNumber + item.amount;
   }, 0);
 
   const btnClasses = `${classes.button} ${
     btnIsHighlighted ? classes.bump : ""
   }`;
+
   useEffect(() => {
     if (items.length === 0) {
       return;

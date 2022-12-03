@@ -14,7 +14,6 @@ function App() {
 
   const closeCartHandler = () => {
     setIsCartOpen(false);
-    console.log("cart is now closed");
   };
 
   return (
