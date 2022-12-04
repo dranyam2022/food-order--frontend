@@ -9,7 +9,6 @@ function App() {
 
   const openCartHandler = () => {
     setIsCartOpen(true);
-    console.log("cart is now open");
   };
 
   const closeCartHandler = () => {
